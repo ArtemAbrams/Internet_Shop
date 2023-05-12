@@ -8,8 +8,7 @@ import lombok.NoArgsConstructor;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 @AllArgsConstructor
-public class PhoneNumber implements ConstraintValidator<PhoneNumberConstraint, String>
-{
+public class PhoneNumber implements ConstraintValidator<PhoneNumberConstraint, String> {
     private final DeliveryRepository deliveryRepository;
 
     @Override

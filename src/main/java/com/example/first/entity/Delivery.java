@@ -37,11 +37,10 @@ public class Delivery extends  AbstractEntity {
     @PhoneNumberConstraint
     private String mobilePhone;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    //@JoinColumn(name = "transport_id")
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     private Transport transport;
 
-    @OneToMany(mappedBy = "delivery")
+    @OneToMany(mappedBy = "delivery", cascade =  {CascadeType.ALL})
     private List<Order> orders = new ArrayList<>();
 
 }

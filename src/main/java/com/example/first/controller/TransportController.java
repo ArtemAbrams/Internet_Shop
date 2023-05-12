@@ -16,8 +16,7 @@ public class TransportController
 {
     private final TransportRepository transportRepository;
     @GetMapping("/AllTransports")
-    public List<TransportDTO> GetUsers()
-    {
+    public List<TransportDTO> GetUsers() {
         return transportRepository.findAll()
                 .stream()
                 .map(TransportDTO::new)
