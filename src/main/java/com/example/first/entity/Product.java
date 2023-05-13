@@ -42,7 +42,7 @@ public class Product extends AbstractEntity {
   @ManyToOne(fetch = FetchType.LAZY)
   private Country country;
 
-  @ManyToMany
+  @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
   @JoinTable(name = "products_orders", joinColumns = @JoinColumn(name = "product_id", referencedColumnName = "Id"),
           inverseJoinColumns = @JoinColumn(name = "order_id", referencedColumnName = "Id"))
   private List<Order> productsOrders = new ArrayList<>();

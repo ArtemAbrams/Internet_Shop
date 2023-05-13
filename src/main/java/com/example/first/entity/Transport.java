@@ -20,7 +20,7 @@ public class Transport extends AbstractEntity
 {
     @Length(min = 1, max = 15)
     @NotNull
-    @Column(name = "Transport_NAME", unique = false)
+    @Column(name = "Transport_NAME", unique = true)
     private String name;
 
     @OneToMany(mappedBy = "transport", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
