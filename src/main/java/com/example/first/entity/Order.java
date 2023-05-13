@@ -34,9 +34,9 @@ public class Order extends AbstractEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Delivery delivery;
-    @OneToMany(mappedBy = "order")
+    @OneToMany(mappedBy = "order", cascade = {CascadeType.REMOVE})
     private List<Feedback> feedbacks = new ArrayList<>();
-    @ManyToMany(mappedBy = "productsOrders")
+    @ManyToMany(mappedBy = "productsOrders", cascade = {CascadeType.MERGE,CascadeType.PERSIST})
     private List<Product> products = new ArrayList<>();
     @Override
     public void toCreate() {setCreateDate(LocalDateTime.now());

@@ -39,7 +39,7 @@ public class Product extends AbstractEntity {
   @DecimalMin(value = "0.01", inclusive = true)
   @DecimalMax(value = "1000", inclusive = true)
   private double weight;
-  @ManyToOne(fetch = FetchType.LAZY)
+  @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
   private Country country;
 
   @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})

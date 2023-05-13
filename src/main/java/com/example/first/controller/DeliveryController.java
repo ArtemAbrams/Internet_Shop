@@ -26,11 +26,12 @@ public class DeliveryController
     private final DeliveryRepository deliveryRepository;
     private final TransportRepository transportRepository;
     @PostMapping("/CreateDelivery")
-    public Delivery SaveDelivery(@RequestParam UUID id, @Valid @RequestBody Delivery newDelivery) {
+    public ResponseEntity<String> SaveDelivery(@RequestParam UUID id, @Valid @RequestBody Delivery newDelivery) {
         var transport = transportRepository.findById(id)
-                .orElseThrow(()->new TransportNotFoundException("Transport with id " + id + " Not Found"));
+                .orElseThrow(() -> new TransportNotFoundException("Transport with id " + id + " Not Found"));
         newDelivery.setTransport(transport);
-        return deliveryRepository.saveAndFlush(newDelivery);
+        deliveryRepository.saveAndFlush(newDelivery);
+        return ResponseEntity.ok("The delivery was created");
     }
     @GetMapping("/addTransportToDelivery/{idTransport}/{idDelivery}")
     public ResponseEntity<String> addTransportToDelivery(@PathVariable UUID idTransport, @PathVariable UUID idDelivery) {

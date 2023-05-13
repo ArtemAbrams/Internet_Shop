@@ -1,9 +1,6 @@
 package com.example.first.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,7 +18,7 @@ import java.util.List;
 public class Country extends AbstractEntity{
     @Column(name = "name_country")
     private String name;
-    @OneToMany(mappedBy = "country")
+    @OneToMany(mappedBy = "country", cascade = {CascadeType.REMOVE})
     private List<Product> products = new ArrayList<>();
 
 }
