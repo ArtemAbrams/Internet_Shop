@@ -5,13 +5,11 @@ import com.example.first.Exceptions.OrderNotFoundException;
 import com.example.first.entity.Feedback;
 import com.example.first.repository.FeedbackRepository;
 import com.example.first.repository.OrderRepository;
-import com.fasterxml.jackson.databind.deser.std.UUIDDeserializer;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.imageio.spi.RegisterableService;
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import java.util.UUID;
 
 @RestController

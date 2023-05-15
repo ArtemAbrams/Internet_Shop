@@ -1,22 +1,17 @@
 package com.example.first.controller;
 
-import ch.qos.logback.core.model.Model;
 import com.example.first.Exceptions.DeliveryNotFoundException;
 import com.example.first.Exceptions.TransportNotFoundException;
-import com.example.first.ValidationClass.PhoneNumber;
 import com.example.first.entity.Delivery;
-import com.example.first.entity.Transport;
 import com.example.first.repository.DeliveryRepository;
 import com.example.first.repository.TransportRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.w3c.dom.html.HTMLTableCaptionElement;
 
-import javax.validation.Valid;
-import java.util.List;
+import jakarta.validation.Valid;
+
 import java.util.UUID;
 
 @RestController

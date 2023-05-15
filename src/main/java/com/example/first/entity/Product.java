@@ -2,13 +2,15 @@ package com.example.first.entity;
 
 import com.example.first.ValidationInterface.NameConstraint;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.DecimalMax;
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Range;
-
-import javax.validation.constraints.*;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +34,6 @@ public class Product extends AbstractEntity {
   @Column(name = "description")
   @NotNull
   @Size(min = 12, max = 800)
-
   private String description;
   @Column(name = "weight_in_kg")
   @NotNull

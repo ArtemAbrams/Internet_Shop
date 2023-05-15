@@ -1,10 +1,9 @@
 package com.example.first.entity;
-import com.sun.istack.NotNull;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.validator.constraints.Length;
+import org.jetbrains.annotations.NotNull;
 
-import javax.validation.constraints.Pattern;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;

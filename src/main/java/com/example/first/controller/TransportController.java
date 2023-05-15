@@ -1,6 +1,5 @@
 package com.example.first.controller;
 
-import com.example.first.DTO.TransportDTO;
 import com.example.first.Exceptions.TransportNotFoundException;
 import com.example.first.entity.Transport;
 import com.example.first.repository.TransportRepository;
@@ -8,11 +7,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.swing.plaf.synth.SynthPopupMenuUI;
-import javax.validation.Valid;
-import java.util.List;
+import jakarta.validation.Valid;
+
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor

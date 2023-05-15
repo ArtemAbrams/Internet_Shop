@@ -3,25 +3,25 @@ package com.example.first.controller;
 import com.example.first.Exceptions.CountryNotFoundException;
 import com.example.first.Exceptions.ProductNotFoundException;
 import com.example.first.Exceptions.TransportNotFoundException;
-import com.example.first.entity.Order;
 import com.example.first.entity.Product;
 import com.example.first.repository.CountryRepository;
 import com.example.first.repository.ProductRepository;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import java.util.UUID;
 
 @RestController
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class ProductController {
     private final ProductRepository productRepository;
     private final CountryRepository countryRepository;
     @PostMapping("/createProduct")
-    public ResponseEntity<String> createProduct(@RequestParam UUID id, @Valid @RequestBody Product product)
-    {
+    public ResponseEntity<String> createProduct(@RequestParam UUID id, @Valid @RequestBody Product product) {
        var country = countryRepository.findById(id)
                .orElseThrow(()-> new TransportNotFoundException("Transport with" + id + "not Found"));
        product.setCountry(country);
