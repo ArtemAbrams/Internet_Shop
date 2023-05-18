@@ -1,19 +1,20 @@
 package com.example.first.controller;
 
+
 import com.example.first.Exceptions.DeliveryNotFoundException;
 import com.example.first.Exceptions.OrderNotFoundException;
 import com.example.first.Exceptions.ProductNotFoundException;
-import com.example.first.entity.Order;
 import com.example.first.repository.DeliveryRepository;
 import com.example.first.repository.OrderRepository;
 import com.example.first.repository.ProductRepository;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import jakarta.validation.Valid;
+import com.example.first.entity.*;
 import java.util.ArrayList;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @RestController
 @AllArgsConstructor
@@ -32,7 +33,9 @@ public class OrderController {
     @PutMapping("/updateOrder")
     public ResponseEntity<String> updateOrder(@RequestParam(name = "deliveryId") UUID id, @RequestParam UUID orderId, @Valid @RequestBody Order order) {
         var updateOrder = orderRepository.findById(orderId)
-                .orElseThrow(() -> new OrderNotFoundException("Order with id" + orderId + "Not Found"));
+                .orElseThrow(() -> {
+                    return new OrderNotFoundException("Order with id" + orderId + "Not Found");
+                });
         var delivery = deliveryRepository.findById(id)
                 .orElseThrow(() -> new  DeliveryNotFoundException("Delivery with" + id + "Not Found"));
         updateOrder.setDelivery(delivery);
@@ -70,17 +73,17 @@ public class OrderController {
       var listOrder = product.getProductsOrders()
               .stream()
               .filter(elem -> elem.getId() == orderId)
-              .toList();
+              .collect(Collectors.toList());
       if(listOrder.size()<number)
           return ResponseEntity.badRequest()
                   .body("You cannot delete" + number + "products");
       var deleteList = listOrder.stream()
               .skip(number)
-              .toList();
-      var newListOrder = new ArrayList<>(product.getProductsOrders()
+              .collect(Collectors.toList());
+      var newListOrder = product.getProductsOrders()
               .stream()
               .filter(elem -> elem.getId() != orderId)
-              .toList());
+              .collect(Collectors.toCollection(ArrayList::new));
       newListOrder.addAll(deleteList);
       product.setProductsOrders(newListOrder);
       productRepository.saveAndFlush(product);

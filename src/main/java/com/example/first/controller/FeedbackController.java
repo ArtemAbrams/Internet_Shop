@@ -1,15 +1,15 @@
 package com.example.first.controller;
 
+
 import com.example.first.Exceptions.FeedbackNotFoundException;
 import com.example.first.Exceptions.OrderNotFoundException;
-import com.example.first.entity.Feedback;
 import com.example.first.repository.FeedbackRepository;
 import com.example.first.repository.OrderRepository;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import jakarta.validation.Valid;
+import com.example.first.entity.*;
 import java.util.UUID;
 
 @RestController
@@ -20,7 +20,9 @@ public class FeedbackController {
     @PostMapping("/createFeedback")
     public ResponseEntity<String> CreateFeedback(@RequestParam() UUID id, @Valid @RequestBody Feedback feedback) {
         var order = orderRepository.findById(id)
-                .orElseThrow(() -> new OrderNotFoundException("Order with id " + id + " not Found"));
+                .orElseThrow(() -> {
+                    return new OrderNotFoundException("Order with id " + id + " not Found");
+                });
         feedback.setOrder(order);
         feedbackRepository.saveAndFlush(feedback);
         return ResponseEntity.ok("You add feedback");

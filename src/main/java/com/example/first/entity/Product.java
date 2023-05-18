@@ -1,17 +1,17 @@
 package com.example.first.entity;
 
+
 import com.example.first.ValidationInterface.NameConstraint;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.DecimalMax;
 import jakarta.validation.constraints.DecimalMin;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.validator.constraints.Range;
-import java.text.DecimalFormat;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,7 +43,7 @@ public class Product extends AbstractEntity {
   @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
   private Country country;
 
-  @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+  @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
   @JoinTable(name = "products_orders", joinColumns = @JoinColumn(name = "product_id", referencedColumnName = "Id"),
           inverseJoinColumns = @JoinColumn(name = "order_id", referencedColumnName = "Id"))
   private List<Order> productsOrders = new ArrayList<>();

@@ -22,6 +22,6 @@ public class Transport extends AbstractEntity
     @Column(name = "Transport_NAME", unique = true)
     private String name;
 
-    @OneToMany(mappedBy = "transport", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @OneToMany(mappedBy = "transport", cascade = {CascadeType.PERSIST, CascadeType.MERGE,CascadeType.REMOVE})
     private List<Delivery> deliveries = new ArrayList<>();
 }

@@ -1,5 +1,6 @@
 package com.example.first.repository;
 
+
 import com.example.first.entity.Feedback;
 import org.springframework.data.jpa.repository.JpaRepository;
 

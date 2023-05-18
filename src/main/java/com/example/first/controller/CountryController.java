@@ -1,8 +1,8 @@
 package com.example.first.controller;
 
+
 import com.example.first.Exceptions.TransportNotFoundException;
 import com.example.first.entity.Country;
-import com.example.first.entity.Transport;
 import com.example.first.repository.CountryRepository;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -16,6 +16,7 @@ import java.util.UUID;
 public class CountryController {
     private final CountryRepository countryRepository;
     @PostMapping("/createCountry")
+
     public ResponseEntity<String> createCountry(@Valid @RequestBody Country country){
         countryRepository.saveAndFlush(country);
         return ResponseEntity.ok("The new country was created");
