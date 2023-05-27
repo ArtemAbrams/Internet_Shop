@@ -1,55 +1,62 @@
 package com.example.first.controller;
-
-
+import com.example.first.DTO.ProductDTO;
+import com.example.first.Data.ProductData;
 import com.example.first.Exceptions.CountryNotFoundException;
 import com.example.first.Exceptions.ProductNotFoundException;
 import com.example.first.Exceptions.TransportNotFoundException;
 import com.example.first.entity.Product;
 import com.example.first.repository.CountryRepository;
 import com.example.first.repository.ProductRepository;
-import jakarta.annotation.Nonnull;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @RequiredArgsConstructor
 @RestController
+@RequestMapping("/product")
 public class ProductController {
     private final ProductRepository productRepository;
     private final CountryRepository countryRepository;
     @PostMapping("/createProduct")
-    public ResponseEntity<String> createProduct(@RequestParam UUID id, @Valid @RequestBody Product product) {
-       var country = countryRepository.findById(id)
-               .orElseThrow(()-> new TransportNotFoundException("Transport with" + id + "not Found"));
-        if(product==null)
+    public ResponseEntity<String> createProduct(@Valid @RequestBody ProductData productData) {
+        if(productData==null)
             return ResponseEntity.badRequest()
-                    .body("Product is null");
-       product.setCountry(country);
+                    .body(null);
+        var country = countryRepository.findById(UUID.fromString(productData.getCountry()))
+                .orElseThrow(() -> new CountryNotFoundException("No this country"));
+        Product product = new Product(productData.getName(), productData.getPrice(), productData.getDescription(), productData.getWeight(), country,null);
        productRepository.saveAndFlush(product);
-       return ResponseEntity.ok("The product was created");
+       return ResponseEntity.ok("You add new product");
+    }
+    @GetMapping("/getAll")
+    public ResponseEntity<List<ProductDTO>> getAll(){
+        var products = productRepository.findAll()
+                .stream()
+                .map(e -> new ProductDTO(e.getId().toString(), e.getName(), e.getPrice(), e.getDescription(), e.getWeight(), e.getCountry().getName()))
+                .toList();
+        return ResponseEntity.ok(products);
     }
     @PutMapping("/updateProduct")
-    public ResponseEntity<String> updateProduct(@RequestParam(name = "productId") UUID prId,  @RequestParam(name = "countryId") UUID id, @Valid @RequestBody Product product)
+    public ResponseEntity<String> updateProduct(@RequestParam(name = "productId") UUID prId, @Valid @RequestBody ProductData productData)
     {
         var updateProduct = productRepository.findById(prId)
                 .orElseThrow(() -> new ProductNotFoundException("Product with" + prId + "not Found"));
-        var country = countryRepository.findById(id)
-                .orElseThrow(()-> new CountryNotFoundException("Country with" + id + "not Found"));
-
+        var country = countryRepository.findById(UUID.fromString(productData.getCountry()))
+                .orElseThrow(() -> new CountryNotFoundException("No this country"));
         updateProduct.setCountry(country);
-        updateProduct.setName(product.getName());
-        updateProduct.setDescription(product.getDescription());
-        updateProduct.setPrice(product.getPrice());
-        updateProduct.setWeight(product.getWeight());
+        updateProduct.setName(productData.getName());
+        updateProduct.setDescription(productData.getDescription());
+        updateProduct.setPrice(productData.getPrice());
+        updateProduct.setWeight(productData.getWeight());
         productRepository.save(updateProduct);
         return ResponseEntity.ok("The product was updated");
     }
     @DeleteMapping("/deleteProduct")
-    public ResponseEntity<String> deleteProduct(@RequestParam UUID id)
-    {
+    public ResponseEntity<String> deleteProduct(@RequestParam UUID id) {
         var product = productRepository.findById(id)
                 .orElseThrow(()->new ProductNotFoundException("Product with" + id + "not Found"));
         productRepository.delete(product);

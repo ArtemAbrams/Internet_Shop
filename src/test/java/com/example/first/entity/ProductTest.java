@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 
 class ProductTest {
     @Test
@@ -31,7 +32,6 @@ class ProductTest {
         Country country = new Country();
         Product actualProduct = new Product("Name", 10.0d, "The characteristics of someone or something", 10.0d, country,
                 new ArrayList<>());
-
         assertSame(country, actualProduct.getCountry());
         assertEquals(10.0d, actualProduct.getWeight());
         assertEquals("Name", actualProduct.getName());

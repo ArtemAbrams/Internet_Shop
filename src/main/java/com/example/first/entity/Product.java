@@ -23,22 +23,12 @@ import java.util.List;
 @Table(name = "products")
 public class Product extends AbstractEntity {
   @Column(name = "name_product")
-  @NotNull
-  @NameConstraint
   private String name;
   @Column(name = "price")
-  @NotNull
-  @DecimalMin(value = "0.01", inclusive = true)
-  @DecimalMax(value = "100000", inclusive = true)
   private double price;
   @Column(name = "description")
-  @NotNull
-  @Size(min = 12, max = 800)
   private String description;
   @Column(name = "weight_in_kg")
-  @NotNull
-  @DecimalMin(value = "0.01", inclusive = true)
-  @DecimalMax(value = "1000", inclusive = true)
   private double weight;
   @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
   private Country country;

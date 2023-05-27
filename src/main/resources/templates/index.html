@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f7f7f7;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        h3 {
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        select {
+            padding: 10px;
+            font-size: 14px;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: #fff;
+            cursor: pointer;
+            border: none;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        a[aria-label="Close"] {
+            color: #666;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<h1>Products</h1>
+<h3>Add Product</h3>
+<form onsubmit="createProduct()">
+    <input type="text" id="add-name" placeholder="Name">
+    <input type="number" id="add-price" placeholder="Price">
+    <input type="text" id="add-description" placeholder="Description Product">
+    <input type="number" id="add-weight" placeholder="Weight Product">
+    <select id="add-country">
+        <option value="" disabled selected>Select Country</option>
+        <option th:each="country : ${countries}"
+                th:value="${country.id}"
+                th:text="${country.name}">
+        </option>
+    </select>
+    <input type="submit" value="Add">
+</form>
+<div id="editProduct">
+    <h3>Edit</h3>
+    <form action="javascript:void(0);" onsubmit="updateProduct()">
+        <input type="hidden" id="edit-id">
+        <input type="text" id="edit-name">
+        <input type="number" id="edit-price">
+        <input type="text" id="edit-description">
+        <input type="number" id="edit-weight">
+        <select id="edit-country">
+            <option value="" disabled selected>Select Country</option>
+            <option th:each="country : ${countries}"
+                    th:value="${country.id}"
+                    th:text="${country.name}">
+            </option>
+        </select>
+        <input type="submit" value="Save">
+        <a onclick="closeInput()" aria-label="Close">&#10006;</a>
+    </form>
+</div>
+<p id="counter"></p>
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Description</th>
+        <th>Weight</th>
+        <th>Country Name</th>
+    </tr>
+    <tbody id="products"></tbody>
+    </thead>
+</table>
+<script type="text/javascript" src="../static/app.js"></script>
+<script>
+    getProducts();
+</script>
+</body>
+</html>
+
