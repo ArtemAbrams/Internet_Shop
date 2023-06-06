@@ -22,15 +22,16 @@ public class ProductController {
     private final ProductRepository productRepository;
     private final CountryRepository countryRepository;
     @PostMapping("/createProduct")
-    public ResponseEntity<String> createProduct(@Valid @RequestBody ProductData productData) {
-        if(productData==null)
+    public ResponseEntity<ProductDTO> createProduct(@Valid @RequestBody ProductData productData) {
+        if(productData == null)
             return ResponseEntity.badRequest()
                     .body(null);
         var country = countryRepository.findById(UUID.fromString(productData.getCountry()))
                 .orElseThrow(() -> new CountryNotFoundException("No this country"));
         Product product = new Product(productData.getName(), productData.getPrice(), productData.getDescription(), productData.getWeight(), country,null);
        productRepository.saveAndFlush(product);
-       return ResponseEntity.ok("You add new product");
+       var productDTO = new ProductDTO(product.getId().toString(), product.getName(), product.getPrice(), product.getDescription(), product.getWeight(), product.getCountry().getName());
+       return ResponseEntity.ok(productDTO);
     }
     @GetMapping("/getAll")
     public ResponseEntity<List<ProductDTO>> getAll(){
@@ -41,8 +42,7 @@ public class ProductController {
         return ResponseEntity.ok(products);
     }
     @PutMapping("/updateProduct")
-    public ResponseEntity<String> updateProduct(@RequestParam(name = "productId") UUID prId, @Valid @RequestBody ProductData productData)
-    {
+    public ResponseEntity<String> updateProduct(@RequestParam(name = "productId") UUID prId, @Valid @RequestBody ProductData productData) {
         var updateProduct = productRepository.findById(prId)
                 .orElseThrow(() -> new ProductNotFoundException("Product with" + prId + "not Found"));
         var country = countryRepository.findById(UUID.fromString(productData.getCountry()))
