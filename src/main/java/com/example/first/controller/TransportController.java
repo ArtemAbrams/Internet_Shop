@@ -1,7 +1,7 @@
 package com.example.first.controller;
 
 
-import com.example.first.Exceptions.TransportNotFoundException;
+import com.example.first.exceptions.TransportNotFoundException;
 import com.example.first.entity.Transport;
 import com.example.first.repository.TransportRepository;
 import jakarta.validation.Valid;

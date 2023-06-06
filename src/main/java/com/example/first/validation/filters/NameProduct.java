@@ -1,13 +1,12 @@
-package com.example.first.ValidationInterface.ValidationClass;
+package com.example.first.validation.filters;
 
 
-import com.example.first.ValidationInterface.NameConstraint;
+import com.example.first.validation.NameConstraint;
 import com.example.first.repository.ProductRepository;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 import lombok.RequiredArgsConstructor;
 
-//@RequiredArgsConstructor
 @RequiredArgsConstructor
 public class NameProduct implements ConstraintValidator<NameConstraint, String> {
     private final ProductRepository productRepository;

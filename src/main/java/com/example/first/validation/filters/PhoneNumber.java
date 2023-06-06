@@ -1,14 +1,13 @@
-package com.example.first.ValidationInterface.ValidationClass;
+package com.example.first.validation.filters;
 
-import com.example.first.ValidationInterface.PhoneNumberConstraint;
+import com.example.first.validation.PhoneNumberConstraint;
 import com.example.first.repository.DeliveryRepository;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class PhoneNumber implements ConstraintValidator<PhoneNumberConstraint, String> {
     private final DeliveryRepository deliveryRepository;
     @Override

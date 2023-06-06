@@ -1,9 +1,8 @@
 package com.example.first.controller;
 import com.example.first.DTO.ProductDTO;
-import com.example.first.Data.ProductData;
-import com.example.first.Exceptions.CountryNotFoundException;
-import com.example.first.Exceptions.ProductNotFoundException;
-import com.example.first.Exceptions.TransportNotFoundException;
+import com.example.first.data.ProductData;
+import com.example.first.exceptions.CountryNotFoundException;
+import com.example.first.exceptions.ProductNotFoundException;
 import com.example.first.entity.Product;
 import com.example.first.repository.CountryRepository;
 import com.example.first.repository.ProductRepository;

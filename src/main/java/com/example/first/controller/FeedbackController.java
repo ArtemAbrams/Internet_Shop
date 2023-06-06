@@ -1,8 +1,8 @@
 package com.example.first.controller;
 
 
-import com.example.first.Exceptions.FeedbackNotFoundException;
-import com.example.first.Exceptions.OrderNotFoundException;
+import com.example.first.exceptions.FeedbackNotFoundException;
+import com.example.first.exceptions.OrderNotFoundException;
 import com.example.first.repository.FeedbackRepository;
 import com.example.first.repository.OrderRepository;
 import jakarta.validation.Valid;

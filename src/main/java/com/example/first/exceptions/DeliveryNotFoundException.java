@@ -1,4 +1,4 @@
-package com.example.first.Exceptions;
+package com.example.first.exceptions;
 
 public class DeliveryNotFoundException extends RuntimeException
 {

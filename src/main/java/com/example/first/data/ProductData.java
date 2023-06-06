@@ -1,8 +1,6 @@
-package com.example.first.Data;
+package com.example.first.data;
 
-import com.example.first.ValidationInterface.NameConstraint;
-import com.example.first.entity.Country;
-import jakarta.persistence.Column;
+import com.example.first.validation.NameConstraint;
 import jakarta.validation.constraints.DecimalMax;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Size;

@@ -1,6 +1,6 @@
-package com.example.first.ValidationInterface;
+package com.example.first.validation;
 
-import com.example.first.ValidationInterface.ValidationClass.NameProduct;
+import com.example.first.validation.filters.NameProduct;
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
 import java.lang.annotation.*;

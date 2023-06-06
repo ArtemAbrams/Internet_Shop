@@ -1,8 +1,8 @@
 package com.example.first.controller;
 
 
-import com.example.first.Exceptions.DeliveryNotFoundException;
-import com.example.first.Exceptions.TransportNotFoundException;
+import com.example.first.exceptions.DeliveryNotFoundException;
+import com.example.first.exceptions.TransportNotFoundException;
 import com.example.first.entity.Delivery;
 import com.example.first.repository.DeliveryRepository;
 import com.example.first.repository.TransportRepository;
