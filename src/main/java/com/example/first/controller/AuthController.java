@@ -1,7 +1,7 @@
 package com.example.first.controller;
 
-import com.example.first.auth.AuthenticationRequest;
-import com.example.first.auth.AuthenticationResponse;
+import com.example.first.data.AuthenticationRequest;
+import com.example.first.data.AuthenticationResponse;
 import com.example.first.auth.AuthenticationService;
 import com.example.first.auth.RegisterRequest;
 import lombok.RequiredArgsConstructor;

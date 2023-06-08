@@ -1,4 +1,4 @@
-package com.example.first.auth;
+package com.example.first.data;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

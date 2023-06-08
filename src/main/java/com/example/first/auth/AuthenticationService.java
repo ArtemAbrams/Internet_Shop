@@ -1,12 +1,13 @@
 package com.example.first.auth;
 
+import com.example.first.data.AuthenticationRequest;
+import com.example.first.data.AuthenticationResponse;
 import com.example.first.SecurityConfig.JwtService;
 import com.example.first.entity.User;
 import com.example.first.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
